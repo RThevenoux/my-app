@@ -2,20 +2,26 @@
 A minimalist NestJS application to test Docker
 ## Installation the app
 
-Required files :
-- package-lock.json
-- package.json
-- tsconfig.build.json
-
 ```bash
 $ npm install
 ```
+
+Installation required :
+- package-lock.json
+- package.json
+- tsconfig.build.json
+- src/
 
 ## Running the app
 
 ```bash
 $ npm run start
-
 ```
 
-Application use port 3000
+## Configuration
+Configuration with environnement variables
+
+| Name     | Description             | Defaut | 
+|---       |---                      |---     |
+| `PORT`   | Port of the application | `3000` |
+| `LOCALE` | Define the language     | `en`   |
