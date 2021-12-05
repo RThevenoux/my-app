@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { env } from 'process';
 
-const local = (env.LOCAL ? env.LOCAL : 'FR');
+const locale = (env.LOCALE ? env.LOCALE : 'en');
 
 @Injectable()
 export class AppService {
   getHello(): string {
-    switch (local) {
+    switch (locale) {
       case 'af': return 'Hello Wêreld!';
       case 'sq': return 'Përshendetje Botë!';
       case 'ar': return 'بالعالم!';
@@ -64,7 +64,7 @@ export class AppService {
       case 'xh': return 'Molo Lizwe!';
       case 'zu': return 'Sawubona Mhlaba!';
       default:
-        return `[Hello World!] (${local} not supported)`;
+        return `[Hello World!] (${locale} not supported)`;
     }
   }
 }
