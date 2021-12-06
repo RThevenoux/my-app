@@ -1,11 +1,13 @@
 import { Injectable } from '@nestjs/common';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
+import { join } from 'path';
 import { env } from 'process';
 
-const locale = (env.LOCALE ? env.LOCALE : 'en');
-
+const DATA_FOLDER = (env.DATA_FOLDER ? env.DATA_FOLDER : "data");
+const VISITS_FILE = "visits.json";
 @Injectable()
 export class AppService {
-  getHello(): string {
+  getHello(locale: string): string {
     switch (locale) {
       case 'af': return 'Hello Wêreld!';
       case 'sq': return 'Përshendetje Botë!';
@@ -65,6 +67,35 @@ export class AppService {
       case 'zu': return 'Sawubona Mhlaba!';
       default:
         return `[Hello World!] (${locale} not supported)`;
+    }
+  }
+
+  exit(): string {
+    setTimeout(() => process.exit(1), 1000);
+    return "Killing app...";
+  }
+
+  visit(): Date[] {
+    const visits = this.readVisits();
+    visits.push(new Date());
+    this.writeVisits(visits);
+    return visits;
+  }
+
+  private writeVisits(visits: Date[]) {
+    mkdirSync(DATA_FOLDER, { recursive: true })
+    const filePath = join(DATA_FOLDER, VISITS_FILE);
+    writeFileSync(filePath, JSON.stringify(visits));
+  }
+
+
+  private readVisits(): Date[] {
+    const filePath = join(DATA_FOLDER, VISITS_FILE);
+
+    if (existsSync(filePath)) {
+      return JSON.parse(readFileSync(filePath, "utf-8"));
+    } else {
+      return [];
     }
   }
 }

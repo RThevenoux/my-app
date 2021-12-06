@@ -21,7 +21,8 @@ $ npm run start
 ## Configuration
 Configuration with environnement variables
 
-| Name     | Description             | Defaut | 
-|---       |---                      |---     |
-| `PORT`   | Port of the application | `3000` |
-| `LOCALE` | Define the language     | `en`   |
+| Name         | Description                        | Defaut | 
+|---           |---                                 |---     |
+| `PORT`       | Port of the application            | `3000` |
+| `LOCALE`     | Define the language                | `en`   |
+| `DATA_FOLDER`| Folder where visits will be stored | `data` |
