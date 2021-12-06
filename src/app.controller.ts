@@ -2,8 +2,9 @@ import { Controller, Get, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 
 import { env } from 'process';
-const DEFAULT_LOCALE = (env.LOCALE ? env.LOCALE : 'en');
 
+const DEFAULT_LOCALE = (env.LOCALE ? env.LOCALE : 'en');
+const START_DATE = new Date();
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) { }
@@ -13,7 +14,8 @@ export class AppController {
 
     const safeLocale = (locale ? locale : DEFAULT_LOCALE);
 
-    return this.appService.getHello(safeLocale);
+    const hello = this.appService.getHello(safeLocale);
+    return `<h1>${hello}</h1><p>Server started at ${START_DATE}</p>`;
   }
 
   @Get("/kill")
